@@ -1,82 +1,193 @@
-
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Saiful Islam | KERE TOI</title>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;600&display=swap" rel="stylesheet">
+  <title>Student Mobile Viewer</title>
   <style>
     body {
-      margin: 0;
-      font-family: 'Poppins', sans-serif;
-      background-color: #000;
+      font-family: Arial, sans-serif;
+      background-color: #111;
       color: #fff;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      min-height: 100vh;
-      padding: 2rem;
       text-align: center;
+      padding: 2rem;
     }
-    img.profile {
-      width: 150px;
-      height: 150px;
-      object-fit: cover;
-      border-radius: 50%;
-      border: 3px solid white;
-      margin-bottom: 1rem;
+    input, button {
+      padding: 10px;
+      font-size: 16px;
+      margin: 10px;
     }
-    h1 {
-      margin: 0;
-      font-size: 2.2rem;
+    button {
+      background: #00ffcc;
+      border: none;
+      cursor: pointer;
     }
-    p {
-      font-size: 1.1rem;
-      margin: 0.5rem 0 1.5rem;
+    .result-box {
+      margin-top: 20px;
+      padding: 20px;
+      background: #222;
+      display: none;
+      border: 1px solid #555;
     }
-    .socials {
-      display: flex;
-      gap: 1rem;
-      flex-wrap: wrap;
-      justify-content: center;
+    .footer {
+      margin-top: 40px;
+      color: #aaa;
     }
-    .socials a {
-      color: white;
+    .fb-link {
+      display: none;
+      margin-top: 20px;
+      font-size: 16px;
+    }
+    .fb-link a {
+      color: #00ffcc;
       text-decoration: none;
-      font-size: 1.4rem;
-    }
-    .socials a img {
-      width: 24px;
-      height: 24px;
-      vertical-align: middle;
-      margin-right: 0.4rem;
+      font-weight: bold;
     }
   </style>
 </head>
 <body>
-  <img src="profile.jpg" alt="Saiful Islam" class="profile">
-  <h1>Saiful Islam <br>(KERE TOI)</h1>
-  <p>Student | Class 10</p>
+  <h1>🔐 Student Contact Viewer</h1>
 
-  <div class="socials">
-    <a href="https://www.facebook.com/ahsan.vir.2024" target="_blank">
-      <img src="https://cdn-icons-png.flaticon.com/512/733/733547.png"> Facebook
-    </a>
-    <a href="https://t.me/saifulmn" target="_blank">
-      <img src="https://cdn-icons-png.flaticon.com/512/2111/2111646.png"> Telegram
-    </a>
-    <a href="https://x.com/keretoi12?s=09" target="_blank">
-      <img src="https://cdn-icons-png.flaticon.com/512/3670/3670151.png"> X (Twitter)
-    </a>
-    <a href="https://www.instagram.com/saifsaiful559?igsh=MzkzOWp5b3ptMDlq" target="_blank">
-      <img src="https://cdn-icons-png.flaticon.com/512/2111/2111463.png"> Instagram
-    </a>
-    <a href="https://wa.me/8801851518538" target="_blank">
-      <img src="https://cdn-icons-png.flaticon.com/512/733/733585.png"> WhatsApp
-    </a>
+  <p>Enter Password:</p>
+  <input type="password" id="passwordInput" placeholder="Enter password" />
+  <br>
+
+  <p>Enter Student Name:</p>
+  <input type="text" id="nameInput" placeholder="e.g. Tanisha" />
+  <button onclick="showNumber()">Show Number</button>
+
+  <div class="result-box" id="resultBox">
+    <h2>Student: <span id="studentName"></span></h2>
+    <p><strong>📞 Mobile Number:</strong> <span id="mobileNumber"></span></p>
   </div>
+
+  <hr style="margin-top:40px; border: none; border-top: 1px solid #333;" />
+
+  <p>📩 Want to contact me?</p>
+  <input type="password" id="contactPassword" placeholder="Enter contact password" />
+  <button onclick="showContact()">Unlock Contact</button>
+
+  <div class="fb-link" id="fbLink">
+    <p>👉 <a href="https://www.facebook.com/ahsan.vir.2024" target="_blank">Message Me on Facebook</a></p>
+  </div>
+
+  <div class="footer">
+    Powered by <strong>Cadershab</strong>
+  </div>
+
+  <script>
+    const PASSWORD = "keretoi";
+    const CONTACT_PASSWORD = "saifulbai";
+
+    const contacts = {
+      "Tanisha": "01816344886",
+      "Titi": "01704470145",
+      "Marium": "01836802304",
+      "Faria": "01890755262",
+      "Amina": "01816271499",
+      "Rida": "01862911568",
+      "Nava": "01814874823",
+      "Rimi": "01817082695",
+      "Afla": "01821035002",
+      "Joi": "0819417198",
+      "Soha": "01711504436",
+      "Jomo": "01811902197",
+      "Asifa": "01325548872",
+      "Eti": "01708111245",
+      "Esrat": "01733949580",
+      "Mim": "01306877994",
+      "Nisa": "01889499838",
+      "Kadiza": "01716074745",
+      "Sabiha": "01611716679",
+      "Rani": "01724600398",
+      "Mehazabin": "01828150069",
+      "Tanha Amin": "01311130265",
+      "Samia": "01811222284",
+      "Afrin": "01771769051",
+      "Nishat": "01733949580",
+      "Ahona": "01838025480",
+      "Camppa": "01777525186",
+      "Israt": "01759975444",
+      "Farema": "01906772724",
+      "Jerin": "01672060486",
+      "Ribida": "01923662602",
+      "Morjina": "01746283405",
+      "Sabikun": "01880343063",
+      "Mim2": "01781814803",
+      "Samiya": "01924947408",
+      "Somaiya": "01323956226",
+      "Noha": "01882001274",
+      "Samiya 2": "01613832939",
+      "Lamiya": "01613832939",
+      "Jalpa": "01881077886",
+      "Taspia": "01990116397",
+      "Musfika": "01815077386",
+      "Sabrina": "01817050638",
+      "Aba": "01799643015",
+      "Lamiya 2": "01725141165",
+      "Rimi talu": "01604951012",
+      "Afsana": "01890476229",
+      "Fouzia": "01915982393",
+      "Tammanna": "01864783109",
+      "Soniya": "01865951370",
+      "Salma": "01851842533",
+      "Humayra": "01835500250",
+      "Taspia 2": "01737737825",
+      "Jeba": "01818602688",
+      "Nadia": "01836888873",
+      "Maria": "01814319688",
+      "Shipa": "01818314801"
+    };
+
+    let wrongAttempts = 0;
+    let isLocked = false;
+
+    function showNumber() {
+      const password = document.getElementById("passwordInput").value.trim();
+      const name = document.getElementById("nameInput").value.trim();
+      const resultBox = document.getElementById("resultBox");
+
+      if (isLocked) {
+        alert("⛔ ৫ মিনিটের জন্য ব্লক করা হয়েছে! পরে আবার চেষ্টা করুন।");
+        return;
+      }
+
+      if (password !== PASSWORD) {
+        wrongAttempts++;
+        if (wrongAttempts >= 2) {
+          isLocked = true;
+          alert("🚫 ২ বার ভুল দিয়েছেন! এখন ৫ মিনিট পর চেষ্টা করুন।");
+          setTimeout(() => {
+            isLocked = false;
+            wrongAttempts = 0;
+            alert("✅ এখন আবার চেষ্টা করতে পারেন।");
+          }, 5 * 60 * 1000);
+        } else {
+          alert("❌ ভুল পাসওয়ার্ড! আর একবার ভুল করলে আপনি ৫ মিনিটের জন্য ব্লক হবেন।");
+        }
+        resultBox.style.display = "none";
+        return;
+      }
+
+      const number = contacts[name];
+      if (number) {
+        document.getElementById("studentName").innerText = name;
+        document.getElementById("mobileNumber").innerText = number;
+        resultBox.style.display = "block";
+      } else {
+        alert("📛 নাম পাওয়া যায়নি!");
+        resultBox.style.display = "none";
+      }
+    }
+
+    function showContact() {
+      const cp = document.getElementById("contactPassword").value.trim();
+      const fb = document.getElementById("fbLink");
+      if (cp === CONTACT_PASSWORD) {
+        fb.style.display = "block";
+      } else {
+        alert("❌ Wrong contact password!");
+      }
+    }
+  </script>
 </body>
 </html>
