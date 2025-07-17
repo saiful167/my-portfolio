@@ -1,193 +1,543 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <title>Student Mobile Viewer</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      background-color: #111;
-      color: #fff;
-      text-align: center;
-      padding: 2rem;
-    }
-    input, button {
-      padding: 10px;
-      font-size: 16px;
-      margin: 10px;
-    }
-    button {
-      background: #00ffcc;
-      border: none;
-      cursor: pointer;
-    }
-    .result-box {
-      margin-top: 20px;
-      padding: 20px;
-      background: #222;
-      display: none;
-      border: 1px solid #555;
-    }
-    .footer {
-      margin-top: 40px;
-      color: #aaa;
-    }
-    .fb-link {
-      display: none;
-      margin-top: 20px;
-      font-size: 16px;
-    }
-    .fb-link a {
-      color: #00ffcc;
-      text-decoration: none;
-      font-weight: bold;
-    }
-  </style>
-</head>
-<body>
-  <h1>🔐 Student Contact Viewer</h1>
-
-  <p>Enter Password:</p>
-  <input type="password" id="passwordInput" placeholder="Enter password" />
-  <br>
-
-  <p>Enter Student Name:</p>
-  <input type="text" id="nameInput" placeholder="e.g. Tanisha" />
-  <button onclick="showNumber()">Show Number</button>
-
-  <div class="result-box" id="resultBox">
-    <h2>Student: <span id="studentName"></span></h2>
-    <p><strong>📞 Mobile Number:</strong> <span id="mobileNumber"></span></p>
-  </div>
-
-  <hr style="margin-top:40px; border: none; border-top: 1px solid #333;" />
-
-  <p>📩 Want to contact me?</p>
-  <input type="password" id="contactPassword" placeholder="Enter contact password" />
-  <button onclick="showContact()">Unlock Contact</button>
-
-  <div class="fb-link" id="fbLink">
-    <p>👉 <a href="https://www.facebook.com/ahsan.vir.2024" target="_blank">Message Me on Facebook</a></p>
-  </div>
-
-  <div class="footer">
-    Powered by <strong>Cadershab</strong>
-  </div>
-
-  <script>
-    const PASSWORD = "keretoi";
-    const CONTACT_PASSWORD = "saifulbai";
-
-    const contacts = {
-      "Tanisha": "01816344886",
-      "Titi": "01704470145",
-      "Marium": "01836802304",
-      "Faria": "01890755262",
-      "Amina": "01816271499",
-      "Rida": "01862911568",
-      "Nava": "01814874823",
-      "Rimi": "01817082695",
-      "Afla": "01821035002",
-      "Joi": "0819417198",
-      "Soha": "01711504436",
-      "Jomo": "01811902197",
-      "Asifa": "01325548872",
-      "Eti": "01708111245",
-      "Esrat": "01733949580",
-      "Mim": "01306877994",
-      "Nisa": "01889499838",
-      "Kadiza": "01716074745",
-      "Sabiha": "01611716679",
-      "Rani": "01724600398",
-      "Mehazabin": "01828150069",
-      "Tanha Amin": "01311130265",
-      "Samia": "01811222284",
-      "Afrin": "01771769051",
-      "Nishat": "01733949580",
-      "Ahona": "01838025480",
-      "Camppa": "01777525186",
-      "Israt": "01759975444",
-      "Farema": "01906772724",
-      "Jerin": "01672060486",
-      "Ribida": "01923662602",
-      "Morjina": "01746283405",
-      "Sabikun": "01880343063",
-      "Mim2": "01781814803",
-      "Samiya": "01924947408",
-      "Somaiya": "01323956226",
-      "Noha": "01882001274",
-      "Samiya 2": "01613832939",
-      "Lamiya": "01613832939",
-      "Jalpa": "01881077886",
-      "Taspia": "01990116397",
-      "Musfika": "01815077386",
-      "Sabrina": "01817050638",
-      "Aba": "01799643015",
-      "Lamiya 2": "01725141165",
-      "Rimi talu": "01604951012",
-      "Afsana": "01890476229",
-      "Fouzia": "01915982393",
-      "Tammanna": "01864783109",
-      "Soniya": "01865951370",
-      "Salma": "01851842533",
-      "Humayra": "01835500250",
-      "Taspia 2": "01737737825",
-      "Jeba": "01818602688",
-      "Nadia": "01836888873",
-      "Maria": "01814319688",
-      "Shipa": "01818314801"
-    };
-
-    let wrongAttempts = 0;
-    let isLocked = false;
-
-    function showNumber() {
-      const password = document.getElementById("passwordInput").value.trim();
-      const name = document.getElementById("nameInput").value.trim();
-      const resultBox = document.getElementById("resultBox");
-
-      if (isLocked) {
-        alert("⛔ ৫ মিনিটের জন্য ব্লক করা হয়েছে! পরে আবার চেষ্টা করুন।");
-        return;
+<html lang="bn">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>দেশনেতার চাঁদা ক্যালকুলেটর</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- html2canvas for image generation -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <!-- Google Fonts for Bengali font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Noto+Sans+Bengali:wght@400;700&family=Tiro+Bangla:ital,wght@0,400;1,400&display=swap"
+      rel="stylesheet"
+    />
+    <!-- Updated Chart.js CDN -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+    <!-- Vercel Analytics -->
+    <script>
+      window.va =
+        window.va ||
+        function () {
+          (window.vaq = window.vaq || []).push(arguments);
+        };
+    </script>
+    <script defer src="/_vercel/insights/script.js"></script>
+    <style>
+      /* Apply Bengali font to the body */
+      body {
+        font-family: "Noto Sans Bengali", sans-serif;
+        scroll-behavior: smooth;
+        background-color: #f3f4f6; /* Light Gray Background */
+      }
+      .main-container {
+        background-color: #ffffff; /* White background */
+        border: 1px solid #e5e7eb;
+      }
+      .result-item {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 12px 16px;
+        border-bottom: 1px solid #e5e7eb;
+        transition: background-color 0.3s;
+      }
+      .result-item:last-child {
+        border-bottom: none;
+      }
+      .result-item:hover {
+        background-color: #f9fafb;
+      }
+      .infographic-card {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 1.5rem;
+        border-radius: 0.75rem;
+        text-align: center;
+      }
+      .meme-card {
+        padding: 1.5rem;
+        border-radius: 1rem;
+        text-align: center;
+        color: white;
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+        border: 2px solid rgba(255, 255, 255, 0.3);
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        min-height: 120px;
+      }
+      .meme-card:hover {
+        transform: translateY(-10px) scale(1.03);
+        box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1),
+          0 10px 10px -5px rgba(0, 0, 0, 0.04);
+      }
+      /* Styles for the receipt to be generated as an image */
+      #receipt-container {
+        position: absolute;
+        left: -9999px; /* Hide it off-screen */
+        width: 1080px;
+        height: 1920px;
+        background: linear-gradient(to bottom, #002347, #004080);
+        color: white;
+        padding: 80px;
+        box-sizing: border-box;
+        font-family: "Tiro Bangla", serif; /* Special font for receipt */
+      }
+      /* Modal styles */
+      #receipt-modal {
+        background-color: rgba(0, 0, 0, 0.7);
       }
 
-      if (password !== PASSWORD) {
-        wrongAttempts++;
-        if (wrongAttempts >= 2) {
-          isLocked = true;
-          alert("🚫 ২ বার ভুল দিয়েছেন! এখন ৫ মিনিট পর চেষ্টা করুন।");
-          setTimeout(() => {
-            isLocked = false;
-            wrongAttempts = 0;
-            alert("✅ এখন আবার চেষ্টা করতে পারেন।");
-          }, 5 * 60 * 1000);
-        } else {
-          alert("❌ ভুল পাসওয়ার্ড! আর একবার ভুল করলে আপনি ৫ মিনিটের জন্য ব্লক হবেন।");
+      /* Mobile responsive styles */
+      @media (max-width: 640px) {
+        .main-container {
+          margin: 0.5rem;
+          padding: 1rem;
         }
-        resultBox.style.display = "none";
-        return;
+        .meme-card {
+          padding: 1rem;
+          min-height: 100px;
+        }
+        .infographic-card {
+          padding: 1rem;
+        }
+        #receipt-modal .bg-white {
+          width: 95% !important;
+          margin: 1rem;
+        }
+        .result-item {
+          padding: 8px 12px;
+          font-size: 0.9rem;
+        }
       }
 
-      const number = contacts[name];
-      if (number) {
-        document.getElementById("studentName").innerText = name;
-        document.getElementById("mobileNumber").innerText = number;
-        resultBox.style.display = "block";
-      } else {
-        alert("📛 নাম পাওয়া যায়নি!");
-        resultBox.style.display = "none";
+      @media (max-width: 480px) {
+        .meme-card {
+          padding: 0.75rem;
+          min-height: 80px;
+        }
+        .text-6xl {
+          font-size: 2.5rem !important;
+        }
+        .w-16.h-16 {
+          width: 3rem !important;
+          height: 3rem !important;
+        }
+        .w-20.h-20 {
+          width: 4rem !important;
+          height: 4rem !important;
+        }
       }
-    }
+    </style>
+  </head>
+  <body class="flex flex-col min-h-screen bg-gray-100">
+    <main
+      class="flex-grow flex items-center justify-center py-4 px-2 sm:py-10 sm:px-4"
+    >
+      <div
+        class="w-full max-w-4xl mx-auto main-container rounded-xl sm:rounded-2xl shadow-xl p-4 sm:p-8 space-y-6 sm:space-y-8 text-gray-800"
+      >
+        <!-- Header Section -->
+        <div class="text-center">
+          <h1 class="text-3xl sm:text-4xl lg:text-5xl font-bold text-blue-800">
+            দেশনেতার চাঁদা ক্যালকুলেটর
+          </h1>
+          <p class="text-gray-600 mt-2 text-base sm:text-lg">
+            আপনার আত্মত্যাগের হিসাব রাখুন! (নেতাদের বিলাসিতার হিসাব আমরা রাখি)
+          </p>
+          <p class="text-red-500 text-sm mt-1 italic">
+            ⚠️ Warning: এই ক্যালকুলেটর ব্যবহারে পকেট ফাঁকা হওয়ার গ্যারান্টি
+            আছে!
+          </p>
+        </div>
 
-    function showContact() {
-      const cp = document.getElementById("contactPassword").value.trim();
-      const fb = document.getElementById("fbLink");
-      if (cp === CONTACT_PASSWORD) {
-        fb.style.display = "block";
-      } else {
-        alert("❌ Wrong contact password!");
-      }
-    }
-  </script>
-</body>
-</html>
+        <!-- Input Section -->
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-6">
+          <div class="space-y-2">
+            <label
+              for="profession"
+              class="text-base sm:text-lg font-medium text-gray-700"
+              >আপনার পেশা কী, বিপ্লবী?</label
+            >
+            <select
+              id="profession"
+              class="w-full px-3 py-2 sm:px-4 sm:py-3 bg-white border-2 border-gray-300 rounded-lg focus:outline-none focus:ring-4 focus:ring-blue-500/50 transition duration-300 text-gray-900 text-sm sm:text-base"
+            >
+              <option value="default">--পেশা নির্বাচন করুন--</option>
+              <option value="doctor">ডাক্তার</option>
+              <option value="engineer">ইঞ্জিনিয়ার</option>
+              <option value="teacher">শিক্ষক</option>
+              <option value="govt_job">সরকারী চাকুরীজীবী</option>
+              <option value="nongovt_job">বেসরকারী চাকুরীজীবী</option>
+              <option value="businessman">ব্যবসায়ী</option>
+              <option value="freelancer">ফ্রিল্যান্সার</option>
+              <option value="rickshaw_puller">রিকশাওয়ালা</option>
+              <option value="day_laborer">দিনমজুর</option>
+              <option value="unemployed">বেকার</option>
+              <option value="expatriate_worker">প্রবাসী শ্রমিক</option>
+              <option value="genz">Gen-Z (বিশেষ শাখা)</option>
+              <option value="retired_awami">অবসরপ্রাপ্ত আওয়ামী লীগার</option>
+              <option value="other">অন্যান্য</option>
+            </select>
+          </div>
+          <div class="space-y-2">
+            <label for="salary" class="text-lg font-medium text-gray-700"
+              >মাসিক আয় কত?</label
+            >
+            <input
+              type="number"
+              id="salary"
+              placeholder="এখানে সাহসের সাথে লিখুন..."
+              class="w-full px-4 py-3 bg-white border-2 border-gray-300 rounded-lg focus:outline-none focus:ring-4 focus:ring-blue-500/50 transition duration-300 text-gray-900"
+            />
+          </div>
+        </div>
+
+        <!-- Calculate Button -->
+        <div>
+          <button
+            onclick="calculateChada()"
+            class="w-full bg-blue-600 text-white font-bold py-3 sm:py-4 px-4 rounded-lg hover:bg-blue-700 active:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-500/50 transition duration-300 transform hover:scale-105 text-lg sm:text-xl"
+          >
+            হিসাব দেখুন!
+          </button>
+        </div>
+
+        <!-- Retired Awami League Infographic Result Section -->
+        <div
+          id="awami-result-container"
+          class="pt-4 hidden space-y-4 sm:space-y-6"
+        >
+          <div class="text-center">
+            <h2 class="text-2xl sm:text-3xl font-bold text-green-600 mb-4">
+              🏛️ অবসরপ্রাপ্ত নেতার জন্য বিশেষ বার্তা! 🏛️
+            </h2>
+            <div class="bg-green-50 p-6 rounded-lg border-2 border-green-200">
+              <div class="text-6xl sm:text-8xl mb-4">🤝</div>
+              <h3 class="text-xl sm:text-2xl font-bold text-green-800 mb-4">
+                "আপনি তো আমাদের পুরানো সহযোদ্ধা!"
+              </h3>
+              <p class="text-lg text-green-700 mb-4">
+                প্রিয় অভিজ্ঞ নেতা, আপনার অবদানের কথা আমরা ভুলিনি। তবে এখন আপনার
+                পালা রিভার্স গিয়ারে! 😄
+              </p>
+              <div class="bg-white p-4 rounded-lg border border-green-300 mb-4">
+                <h4 class="font-bold text-green-800 mb-2">
+                  🎁 আপনার জন্য বিশেষ সুবিধা:
+                </h4>
+                <ul class="text-left text-green-700 space-y-1">
+                  <li>✓ ৫০% ছাড়ে চাঁদা!</li>
+                  <li>✓ ১৫ বছরের কিস্তিতে পরিশোধ!</li>
+                  <li>✓ নোবেল শান্তি পুরস্কারের আশ্বাস!</li>
+                  <li>✓ পার্টি অফিসে বিনামূল্যে চা!</li>
+                </ul>
+              </div>
+              <p class="text-sm text-green-600 italic">
+                "রাজনীতিতে অবসর নেই, শুধু দায়িত্ব বদলায়!" - নেতৃত্ব দর্শন
+              </p>
+            </div>
+          </div>
+
+          <!-- Special Receipt Button for Retired Members -->
+          <div class="text-center mt-6">
+            <button
+              onclick="generateSpecialReceipt()"
+              class="bg-gradient-to-r from-green-600 to-blue-600 text-white px-6 py-3 sm:px-8 sm:py-4 rounded-lg font-bold text-base sm:text-lg hover:from-green-700 hover:to-blue-700 transition-all duration-300 transform hover:scale-105 shadow-lg"
+            >
+              🎖️ বিশেষ সনদপত্র ডাউনলোড করুন
+            </button>
+          </div>
+
+          <!-- Additional Satirical Content for Retired Members -->
+          <div class="mt-6">
+            <h3
+              class="text-xl sm:text-2xl font-bold text-center text-red-700 mb-4"
+            >
+              "অবসরপ্রাপ্ত" শাখার ফলাফল
+            </h3>
+            <div
+              class="meme-card col-span-1 md:col-span-2 mt-4 sm:mt-6"
+              style="background: linear-gradient(135deg, #b91c1c, #7f1d1d)"
+            >
+              <div class="w-16 h-16 sm:w-20 sm:h-20 mb-3 text-4xl sm:text-6xl">
+                🚪
+              </div>
+              <div class="text-2xl sm:text-3xl font-bold">
+                মাঙ্গের নাতি, যা ভাগ!
+              </div>
+              <p class="mt-2 text-base sm:text-lg">
+                "আগে কি সুন্দর দিন কাটাইতাম..."
+              </p>
+            </div>
+            <div
+              class="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6 mt-4 sm:mt-6"
+            >
+              <div
+                class="meme-card"
+                style="background: linear-gradient(135deg, #166534, #14532d)"
+              >
+                <div
+                  class="w-16 h-16 sm:w-20 sm:h-20 mb-3 text-4xl sm:text-6xl"
+                >
+                  💰
+                </div>
+                <div class="text-xl sm:text-2xl font-bold">অবদান: ১০%</div>
+                <p class="mt-2 text-sm sm:text-md">"দলের দুর্দিনে পাশে আছি!"</p>
+              </div>
+              <div
+                class="meme-card"
+                style="background: linear-gradient(135deg, #b45309, #78350f)"
+              >
+                <div
+                  class="w-16 h-16 sm:w-20 sm:h-20 mb-3 text-4xl sm:text-6xl"
+                >
+                  🏦
+                </div>
+                <div class="text-xl sm:text-2xl font-bold">অবশিষ্ট: ৯০%</div>
+                <p class="mt-2 text-sm sm:text-md">"এইটা সুইস ব্যাংকে যাবে"</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Gen-Z Infographic Result Section -->
+        <div
+          id="genz-result-container"
+          class="pt-4 hidden space-y-4 sm:space-y-6"
+        >
+          <div
+            class="text-center p-4 bg-red-100 border-2 border-red-500 rounded-lg my-4"
+          >
+            <p
+              class="text-2xl sm:text-4xl font-bold text-red-700 animate-pulse"
+            >
+              "চাঁদা? পুটকি দিয়ে ভরে দিবো! 💀"
+            </p>
+            <p class="text-lg text-red-600 mt-2">
+              "আঙ্ক���ল, রাজনীতি আর ক্রিঞ্জ এর মধ্যে পার্থক্য কী?"
+            </p>
+          </div>
+          <div
+            class="grid grid-cols-2 md:grid-cols-3 gap-2 sm:gap-4 mt-4 sm:mt-6"
+          >
+            <div
+              class="meme-card"
+              style="background: linear-gradient(135deg, #ef4444, #b91c1c)"
+            >
+              <div
+                class="w-12 h-12 sm:w-16 sm:h-16 mb-2 sm:mb-3 text-3xl sm:text-6xl"
+              >
+                🎯
+              </div>
+              <div class="text-lg sm:text-2xl font-bold">BNP CDI</div>
+            </div>
+            <div
+              class="meme-card"
+              style="background: linear-gradient(135deg, #f97316, #c2410c)"
+            >
+              <div
+                class="w-12 h-12 sm:w-16 sm:h-16 mb-2 sm:mb-3 text-3xl sm:text-6xl"
+              >
+                🔥
+              </div>
+              <div class="text-lg sm:text-2xl font-bold">চুদলাম না যা ভাগ</div>
+            </div>
+            <div
+              class="meme-card"
+              style="background: linear-gradient(135deg, #22c55e, #15803d)"
+            >
+              <div
+                class="w-12 h-12 sm:w-16 sm:h-16 mb-2 sm:mb-3 text-3xl sm:text-6xl"
+              >
+                👑
+              </div>
+              <div class="text-lg sm:text-2xl font-bold">TINKU ZIA</div>
+            </div>
+            <div
+              class="meme-card"
+              style="background: linear-gradient(135deg, #8b5cf6, #6d28d9)"
+            >
+              <div
+                class="w-12 h-12 sm:w-16 sm:h-16 mb-2 sm:mb-3 text-3xl sm:text-6xl"
+              >
+                💀
+              </div>
+              <div class="text-sm sm:text-lg font-bold">
+                এক দুই তিন চার,<br />ছাত্রদলের পুটকি মার।
+              </div>
+            </div>
+            <div
+              class="meme-card"
+              style="background: linear-gradient(135deg, #64748b, #334155)"
+            >
+              <div
+                class="w-12 h-12 sm:w-16 sm:h-16 mb-2 sm:mb-3 text-3xl sm:text-6xl"
+              >
+                🏠
+              </div>
+              <div class="text-sm sm:text-lg font-bold">
+                টিনের চালে কাউয়া,<br />তারেক জিয়া শাউয়া।
+              </div>
+            </div>
+            <div
+              class="meme-card"
+              style="background: linear-gradient(135deg, #f59e0b, #d97706)"
+            >
+              <div
+                class="w-12 h-12 sm:w-16 sm:h-16 mb-2 sm:mb-3 text-3xl sm:text-6xl"
+              >
+                🌾
+              </div>
+              <div class="text-sm sm:text-lg font-bold">
+                ধান শিষের নিশানা,<br />পকেট খালি করার পানা।
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Regular Result Section -->
+        <div id="result-container" class="pt-4 hidden space-y-10">
+          <!-- Infographic Section -->
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-6 text-center">
+            <div class="infographic-card bg-red-50 border-2 border-red-200">
+              <h3 class="text-xl font-bold text-red-800 mb-3">
+                আপনার হাতে থাকবে
+              </h3>
+              <div id="survival-icon" class="w-20 h-20 mb-3 text-red-600"></div>
+
+              <p
+                id="remaining-salary"
+                class="font-bold text-2xl text-red-700"
+              ></p>
+              <p
+                id="survival-text"
+                class="text-md mt-2 font-semibold text-red-600"
+              ></p>
+            </div>
+            <div class="infographic-card bg-sky-50 border-2 border-sky-200">
+              <h3 class="text-xl font-bold text-sky-800 mb-3">
+                হাই কমান্ডের প্রতিক্রিয়া
+              </h3>
+              <div
+                id="leader-mood-icon"
+                class="w-20 h-20 mb-3 text-sky-600"
+              ></div>
+              <p
+                id="leader-mood-text"
+                class="text-lg font-semibold text-sky-700"
+              ></p>
+            </div>
+            <div class="infographic-card bg-green-50 border-2 border-green-200">
+              <h3 class="text-xl font-bold text-green-800 mb-3">
+                আপনার টাকার সদ্ব্যবহার
+              </h3>
+              <div
+                id="contribution-icon"
+                class="w-20 h-20 mb-3 text-green-600"
+              ></div>
+              <p
+                id="contribution-text"
+                class="text-lg font-semibold text-green-700"
+              ></p>
+            </div>
+          </div>
+
+          <div
+            id="humor-text"
+            class="text-center text-lg sm:text-xl font-semibold text-blue-800 bg-blue-50 p-3 sm:p-4 rounded-lg border border-blue-200"
+          ></div>
+          <div>
+            <h3
+              class="text-xl sm:text-2xl font-bold text-center text-gray-700 mb-4"
+            >
+              আপনার অবদানের গ্রাফচিত্র
+            </h3>
+            <div class="bg-gray-50 p-3 sm:p-4 rounded-lg">
+              <canvas id="chadaChart"></canvas>
+            </div>
+          </div>
+          <div>
+            <h3
+              class="text-xl sm:text-2xl font-bold text-center text-gray-700 mb-4"
+            >
+              বিস্তারিত হিসাব-নিকাশ
+            </h3>
+            <div
+              id="result-details"
+              class="text-base sm:text-lg bg-gray-50 p-3 sm:p-4 rounded-lg shadow-inner"
+            ></div>
+          </div>
+          <div class="text-center">
+            <button
+              id="print-button"
+              onclick="generateReceipt()"
+              class="bg-purple-600 text-white font-bold py-2 sm:py-3 px-4 sm:px-6 rounded-lg hover:bg-purple-700 transition duration-300 transform hover:scale-105 text-base sm:text-lg"
+            >
+              রসিদ ডাউনলোড করুন
+            </button>
+          </div>
+        </div>
+
+        <!-- Error Message Section -->
+        <div
+          id="error-message"
+          class="text-center text-red-600 font-bold text-base sm:text-lg hidden"
+        ></div>
+      </div>
+    </main>
+
+    <!-- Receipt Modal -->
+    <div
+      id="receipt-modal"
+      class="fixed inset-0 w-full h-full items-center justify-center hidden z-50"
+    >
+      <div
+        class="bg-white rounded-lg shadow-xl p-4 sm:p-6 w-11/12 sm:w-10/12 md:w-1/3 text-center relative max-h-screen overflow-y-auto"
+      >
+        <button
+          onclick="closeModal()"
+          class="absolute top-2 right-3 text-2xl font-bold text-gray-600"
+        >
+          &times;
+        </button>
+        <h2 class="text-2xl font-bold mb-4">আপনার বিপ্লবী রসিদ</h2>
+        <p class="text-gray-600 mb-4">
+          আপনার আত্মত্যাগের প্রমাণপত্র নিচে দেওয়া হলো। ছবিটি ডাউনলোড করুন।
+        </p>
+        <div
+          id="receipt-preview"
+          class="mb-4 border-2 border-dashed border-gray-300 p-2"
+        ></div>
+        <a
+          id="download-link"
+          href="#"
+          download="chada_roshid.png"
+          class="w-full block bg-green-600 text-white font-bold py-2 sm:py-3 px-4 rounded-lg hover:bg-green-700 transition duration-300 text-sm sm:text-base"
+          >ডাউনলোড</a
+        >
+      </div>
+    </div>
+
+    <!-- Hidden container for generating the receipt image -->
+    <div id="receipt-container" class="flex flex-col justify-between">
+      <div class="text-center">
+        <h1 id="receipt-title" class="text-6xl font-bold mt-20">
+          আত্মত্যাগের চূড়ান্ত দলিল
+        </h1>
+        <h2 class="text-4xl mt-4 opacity-80">লন্ডন সংযোগ প্রকল্প</h2>
+      </div>
+      <div class="text-left text-5xl space-y-8 mt-20">
+        <p>
+          বিপ্লবীর নাম: <span id="receipt-profession" class="font-bold"></span>
+        </p>
+        <p>মাসিক চাঁদা: <span id="receipt-chada" class="font-bold"></span></p>
+        <p>
+          অবশিষ্ট (মাস চালানোর জন্য):
+          <span id="receipt-remainin
