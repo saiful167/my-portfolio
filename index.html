@@ -1,33 +1,19 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Location Tracker</title>
+  <title>Visitor Tracker</title>
 </head>
 <body>
-  <h2>📍 Checking your location...</h2>
-  <p id="status">Please wait...</p>
+  <h2>Welcome to Our Site</h2>
+  <p>If you're a legitimate visitor, have a nice day.</p>
 
   <script>
-    if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition(function(position) {
-        const lat = position.coords.latitude;
-        const lon = position.coords.longitude;
-
-        document.getElementById("status").innerText = 
-          "Latitude: " + lat + "\nLongitude: " + lon;
-
-        // Send to server
-        fetch('save_location.php', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-          body: `latitude=${lat}&longitude=${lon}`
-        });
-      }, function(error) {
-        document.getElementById("status").innerText = "Location access denied!";
-      });
-    } else {
-      document.getElementById("status").innerText = "Geolocation not supported!";
-    }
+    // Automatically send visitor info to the server
+    fetch('log_attacker.php', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+      body: 'browser=' + navigator.userAgent
+    });
   </script>
 </body>
 </html>
