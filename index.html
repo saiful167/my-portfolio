@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html>
 <head>
@@ -31,10 +30,11 @@
 
         document.getElementById("smsForm").addEventListener("submit", function(e) {
             e.preventDefault();
+
             let number = document.getElementById("number").value;
             let message = encodeURIComponent(document.getElementById("message").value);
             let amount = parseInt(document.getElementById("amount").value);
-            let key = "bd";
+            let key = "bd";  // চাইলে এখানে তোমার নিজস্ব key বসাতে পারো
             let result = "";
 
             for (let i = 0; i < amount; i++) {
