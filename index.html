@@ -1,56 +1,49 @@
+
 <!DOCTYPE html>
-<html lang="bn">
+<html>
 <head>
-    <meta charset="UTF-8">
     <title>SMS Sender</title>
-    <style>
-        body {
-            font-family: sans-serif;
-            background-color: #f2f2f2;
-            padding: 40px;
-            text-align: center;
-        }
-        h1 {
-            color: #333;
-        }
-        form {
-            background-color: white;
-            display: inline-block;
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0 0 10px #ccc;
-        }
-        input, textarea {
-            width: 90%;
-            padding: 10px;
-            margin: 10px;
-            border: 1px solid #aaa;
-            border-radius: 5px;
-        }
-        button {
-            background-color: #28a745;
-            color: white;
-            padding: 10px 20px;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-        }
-        .response {
-            margin-top: 15px;
-            font-weight: bold;
-        }
-    </style>
+    <meta charset="utf-8">
 </head>
 <body>
-    <h1>একাধিক নম্বরে SMS পাঠান</h1>
-    <form action="/send_sms" method="post">
-        <input type="text" name="numbers" placeholder="নাম্বার দিন (কমা দিয়ে আলাদা)" required>
-        <input type="text" name="amount" placeholder="এমাউন্ট (যেমন: 100)" required>
-        <button type="submit">SMS পাঠান</button>
+    <h2>📲 Custom SMS Sender</h2>
+    <form id="smsForm">
+        <label>📞 নম্বর:</label><br>
+        <input type="text" id="number" required><br><br>
+
+        <label>💬 মেসেজ:</label><br>
+        <textarea id="message" required></textarea><br><br>
+
+        <label>🔁 কতবার পাঠাতে চান:</label><br>
+        <input type="number" id="amount" value="1" min="1" required><br><br>
+
+        <button type="submit">📤 পাঠাও</button>
     </form>
 
-    {% if response %}
-        <div class="response">{{ response }}</div>
-    {% endif %}
+    <div id="result"></div>
+
+    <script>
+        document.getElementById("smsForm").addEventListener("submit", function(e) {
+            e.preventDefault();
+            let number = document.getElementById("number").value;
+            let message = encodeURIComponent(document.getElementById("message").value);
+            let amount = parseInt(document.getElementById("amount").value);
+            let key = "bd";
+            let result = "";
+
+            for (let i = 0; i < amount; i++) {
+                fetch(`https://helobuy.shop/csms.php?key=${key}&number=${number}&message=${message}`)
+                    .then(res => res.text())
+                    .then(data => {
+                        result += `✅ ${i + 1} বার পাঠানো হয়েছে: ${data}<br>`;
+                        document.getElementById("result").innerHTML = result;
+                    })
+                    .catch(err => {
+                        result += `❌ Error: ${err}<br>`;
+                        document.getElementById("result").innerHTML = result;
+                    });
+            }
+        });
+    </script>
 </body>
 </html>
