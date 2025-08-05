@@ -23,6 +23,12 @@
     <div id="result"></div>
 
     <script>
+        /*
+        এই স্ক্রিপ্টে ব্যবহার করা হয়েছে:
+        ✅ API: https://helobuy.shop/csms.php
+        ✅ Parameters: key, number, message
+        */
+
         document.getElementById("smsForm").addEventListener("submit", function(e) {
             e.preventDefault();
             let number = document.getElementById("number").value;
