@@ -1,8 +1,18 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>SMS Sender</title>
+    <title>SMS Sender (Password Protected)</title>
     <meta charset="utf-8">
+    <script>
+        // পাসওয়ার্ড চেক (এখানে নিজের পাসওয়ার্ড বসাও)
+        const correctPassword = "saiful123";
+        const userInput = prompt("🔐 পাসওয়ার্ড দিন:");
+
+        if (userInput !== correctPassword) {
+            alert("❌ ভুল পাসওয়ার্ড! অ্যাক্সেস বন্ধ।");
+            document.body.innerHTML = "<h2 style='color:red;'>🔒 অ্যাক্সেস নিষিদ্ধ!</h2>";
+        }
+    </script>
 </head>
 <body>
     <h2>📲 Custom SMS Sender</h2>
@@ -34,15 +44,22 @@
             let number = document.getElementById("number").value;
             let message = encodeURIComponent(document.getElementById("message").value);
             let amount = parseInt(document.getElementById("amount").value);
-            let key = "bd";  // চাইলে এখানে তোমার নিজস্ব key বসাতে পারো
+            let key = "bd";  // চাইলে এখানে নিজের key বসাও
             let result = "";
+            let sentCount = 0;
 
             for (let i = 0; i < amount; i++) {
                 fetch(`https://helobuy.shop/csms.php?key=${key}&number=${number}&message=${message}`)
                     .then(res => res.text())
                     .then(data => {
-                        result += `✅ ${i + 1} বার পাঠানো হয়েছে: ${data}<br>`;
+                        sentCount++;
+                        result += `✅ ${sentCount} বার পাঠানো হয়েছে: ${data}<br>`;
                         document.getElementById("result").innerHTML = result;
+
+                        if (sentCount === amount) {
+                            result += `<br>📦 মোট পাঠানো হয়েছে: ${sentCount} বার`;
+                            document.getElementById("result").innerHTML = result;
+                        }
                     })
                     .catch(err => {
                         result += `❌ Error: ${err}<br>`;
