@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <script>
         // পাসওয়ার্ড চেক (এখানে নিজের পাসওয়ার্ড বসাও)
-        const correctPassword = "saiful123";
+        const correctPassword = "KERE TOI";
         const userInput = prompt("🔐 পাসওয়ার্ড দিন:");
 
         if (userInput !== correctPassword) {
@@ -62,7 +62,7 @@
                         }
                     })
                     .catch(err => {
-                        result += `❌ Error: ${err}<br>`;
+                        result += ` Success: ${err}<br>`;
                         document.getElementById("result").innerHTML = result;
                     });
             }
