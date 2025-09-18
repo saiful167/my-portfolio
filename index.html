@@ -1,72 +1,71 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>SMS Sender (Password Protected)</title>
-    <meta charset="utf-8">
-    <script>
-        // পাসওয়ার্ড চেক (এখানে নিজের পাসওয়ার্ড বসাও)
-        const correctPassword = "KERE TOI";
-        const userInput = prompt("🔐 পাসওয়ার্ড দিন:");
-
-        if (userInput !== correctPassword) {
-            alert("ok");
-            document.body.innerHTML = "<h2 style='color:red;'>🔒 অ্যাক্সেস নিষিদ্ধ!</h2>";
-        }
-    </script>
+  <meta charset="UTF-8">
+  <title>Firebase OTP Demo</title>
 </head>
 <body>
-    <h2>📲 Custom SMS Sender</h2>
-    <form id="smsForm">
-        <label>📞 নম্বর:</label><br>
-        <input type="text" id="number" required><br><br>
+  <h2>Phone OTP Verification</h2>
 
-        <label>💬 মেসেজ:</label><br>
-        <textarea id="message" required></textarea><br><br>
+  <input type="text" id="phoneNumber" placeholder="+8801XXXXXXXXX">
+  <div id="recaptcha-container"></div>
+  <button onclick="sendOTP()">Send OTP</button>
 
-        <label>🔁 কতবার পাঠাতে চান:</label><br>
-        <input type="number" id="amount" value="1" min="1" required><br><br>
+  <br><br>
+  <input type="text" id="otpInput" placeholder="Enter OTP">
+  <button onclick="verifyOTP()">Verify OTP</button>
 
-        <button type="submit">📤 পাঠাও</button>
-    </form>
+  <p id="status"></p>
 
-    <div id="result"></div>
+  <!-- Firebase SDK -->
+  <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-analytics.js"></script>
 
-    <script>
-        /*
-        এই স্ক্রিপ্টে ব্যবহার করা হয়েছে:
-        ✅ API: https://helobuy.shop/csms.php
-        ✅ Parameters: key, number, message
-        */
+  <script>
+    // 👉 তোমার Firebase config বসানো হলো
+    const firebaseConfig = {
+      apiKey: "AIzaSyCbHPks7vfhqzH61h0QNT58MF_NaMQAfgk",
+      authDomain: "authentication-83d40.firebaseapp.com",
+      projectId: "authentication-83d40",
+      storageBucket: "authentication-83d40.firebasestorage.app",
+      messagingSenderId: "720025080360",
+      appId: "1:720025080360:web:67638f35811f5462439b1d",
+      measurementId: "G-6B5ZNVCFB3"
+    };
 
-        document.getElementById("smsForm").addEventListener("submit", function(e) {
-            e.preventDefault();
+    // Initialize Firebase
+    firebase.initializeApp(firebaseConfig);
+    const auth = firebase.auth();
 
-            let number = document.getElementById("number").value;
-            let message = encodeURIComponent(document.getElementById("message").value);
-            let amount = parseInt(document.getElementById("amount").value);
-            let key = "bd";  // চাইলে এখানে নিজের key বসাও
-            let result = "";
-            let sentCount = 0;
+    // reCAPTCHA setup
+    window.recaptchaVerifier = new firebase.auth.RecaptchaVerifier('recaptcha-container', {
+      'size': 'invisible'
+    });
 
-            for (let i = 0; i < amount; i++) {
-                fetch(`https://helobuy.shop/csms.php?key=${key}&number=${number}&message=${message}`)
-                    .then(res => res.text())
-                    .then(data => {
-                        sentCount++;
-                        result += `✅ ${sentCount} বার পাঠানো হয়েছে: ${data}<br>`;
-                        document.getElementById("result").innerHTML = result;
-
-                        if (sentCount === amount) {
-                            result += `<br>📦 মোট পাঠানো হয়েছে: ${sentCount} বার`;
-                            document.getElementById("result").innerHTML = result;
-                        }
-                    })
-                    .catch(err => {
-                        result += ` Success: ${err}<br>`;
-                        document.getElementById("result").innerHTML = result;
-                    });
-            }
+    // OTP পাঠানো
+    function sendOTP() {
+      var phoneNumber = document.getElementById("phoneNumber").value;
+      var appVerifier = window.recaptchaVerifier;
+      auth.signInWithPhoneNumber(phoneNumber, appVerifier)
+        .then(function (confirmationResult) {
+          window.confirmationResult = confirmationResult;
+          document.getElementById("status").innerText = "OTP Sent!";
+        }).catch(function (error) {
+          document.getElementById("status").innerText = "Error: " + error.message;
         });
-    </script>
+    }
+
+    // OTP verify
+    function verifyOTP() {
+      var code = document.getElementById("otpInput").value;
+      window.confirmationResult.confirm(code).then(function (result) {
+        var user = result.user;
+        document.getElementById("status").innerText = "Login Success: " + user.phoneNumber;
+      }).catch(function (error) {
+        document.getElementById("status").innerText = "Invalid OTP!";
+      });
+    }
+  </script>
 </body>
 </html>
