@@ -1,69 +1,775 @@
+
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="no-js" data-theme="dark">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Phone OTP Verification</title>
+  <title>AURA | ALIF UZZAMAN (UTSHO)-AURA - Developer & Security Specialist</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="description" content="ALIF UZZAMAN (UTSHO) - AURA | Professional Developer & Security Specialist | Cyber Shield Bangladesh">
+  <meta name="theme-color" content="#05080b" id="theme-color">
+  <link rel="icon" type="image/x-icon" href="favicon.ico">
+  <link rel="preload" href="fonts/jetbrains-mono-regular.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="style.css?v=2">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
+  <script>document.documentElement.classList.remove('no-js');</script>
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Person",
+  "name": "ALIF UZZAMAN",
+  "alternateName": "AURA",
+  "url": "https://lewra.shop",
+  "telegram": "@JIMIORA",
+  "image": "https://lewra.shop/img/profile.jpg",
+  "jobTitle": "Full Stack Developer & Security Specialist",
+  "description": "ALIF UZZAMAN (UTSHO), known as AURA, is a professional developer and security specialist from Bangladesh. Member of Cyber Shield Bangladesh with expertise in web development, API integration, and cybersecurity solutions.",
+  "birthDate": "2009-11-19",
+  "nationality": "Bangladeshi",
+  "gender": "Male",
+  "knowsLanguage": ["Bengali", "English"],
+  "sameAs": [
+    "https://lewra.shop",
+    "https://t.me/JIMIORA",
+    "https://t.me/CYBER_SHIELD_BANGLADESH"
+  ],
+  "worksFor": {
+    "@type": "Organization",
+    "name": "Cyber Shield Bangladesh",
+    "url": "https://t.me/CYBER_SHIELD_BANGLADESH"
+  },
+  "alumniOf": "Self-taught in Software Development & Cybersecurity",
+  "skills": [
+    "Web Development",
+    "API Development",
+    "Cybersecurity",
+    "PHP Development",
+    "Python Scripting",
+    "JavaScript Development",
+    "Database Management"
+  ]
+}
+</script>
+  
 </head>
 <body>
-  <h2>Phone OTP Verification</h2>
+  <!-- Animated Background -->
+  <canvas id="bg-flow" aria-hidden="true"></canvas>
+  <div class="bg-grid" aria-hidden="true"></div>
+  <div class="bg-aurora" aria-hidden="true"></div>
+  <div id="perf-panel" class="perf-panel" hidden></div>
+  <div id="live-region" class="sr-only" aria-live="polite"></div>
 
-  <input type="text" id="phoneNumber" placeholder="+8801XXXXXXXXX">
-  <div id="recaptcha-container"></div>
-  <button onclick="sendOTP()">Send OTP</button>
+  <a class="skip-link" href="#main">Skip to main content</a>
 
-  <br><br>
-  <input type="text" id="otpInput" placeholder="Enter OTP">
-  <button onclick="verifyOTP()">Verify OTP</button>
+  <header class="site-header" id="top">
+    <div class="header-inner">
+      <div class="brand">
+        <span class="brand-icon"><i class="bi bi-braces" aria-hidden="true"></i></span>
+        <span class="brand-name"><span class="accent-dot">AURA</span></span>
+      </div>
+      <nav class="nav" aria-label="Primary">
+        <ul class="nav__list">
+          <li><a href="#about" data-nav>About</a></li>
+          <li><a href="#stack" data-nav>Stack</a></li>
+          <li><a href="#projects" data-nav>Projects</a></li>
+          <li><a href="#contact" data-nav>Contact</a></li>
+        </ul>
+      </nav>
+      <div class="header-actions">
+        <button id="themeToggle" class="icon-btn" aria-label="Toggle theme">
+          <i class="bi bi-sun-fill theme-icon" aria-hidden="true"></i>
+        </button>
+        <button class="nav-toggle" aria-label="Toggle navigation" aria-expanded="false" aria-controls="mobileNav">
+          <span class="nav-toggle__line"></span>
+          <span class="nav-toggle__line"></span>
+          <span class="nav-toggle__line"></span>
+        </button>
+      </div>
+    </div>
+    <div id="mobileNav" class="mobile-nav" hidden>
+      <ul class="mobile-nav__list">
+        <li><a href="#about" data-nav>About</a></li>
+        <li><a href="#stack" data-nav>Stack</a></li>
+        <li><a href="#projects" data-nav>Projects</a></li>
+        <li><a href="#contact" data-nav>Contact</a></li>
+      </ul>
+    </div>
+  </header>
 
-  <p id="status"></p>
+  <main id="main">
+    <!-- HERO -->
+    <section class="section hero" aria-labelledby="hero-title">
+      <div class="hero__layout">
+        <div class="hero__content">
+          <h1 id="hero-title" class="hero__title">
+            ALIF UZZAMAN <span class="accent-text">(UTSHO)</span>
+          </h1>
+          <p class="hero__roles">
+            <span class="role-prefix"><i class="bi bi-stars" aria-hidden="true"></i></span>
+            <span class="role-rotator" data-roles='["Full Stack Developer","Security Specialist","API Developer","Problem Solver"]'>AURA</span>
+            <span class="caret" aria-hidden="true"></span>
+          </p>
+          <p class="hero__tagline">
+            Professional developer and security specialist passionate about creating innovative solutions. 
+            Specializing in web development, API integration, and cybersecurity with a focus on clean code and user experience.
+          </p>
+          <div class="hero__actions">
+            <a href="#projects" class="btn btn--primary"><i class="bi bi-kanban" aria-hidden="true"></i> View Projects</a>
+            <a href="#contact" class="btn btn--outline"><i class="bi bi-send" aria-hidden="true"></i> Get In Touch</a>
+            <button id="copySnippet" class="btn btn--ghost" data-copy-target="#heroSnippet"><i class="bi bi-clipboard" aria-hidden="true"></i> Copy Bio</button>
+          </div>
+          <ul class="hero__meta">
+            <li><i class="bi bi-shield-check"></i> Security Focused</li>
+            <li><i class="bi bi-code-slash"></i> Clean Code</li>
+            <li><i class="bi bi-lightning-charge"></i> Fast Delivery</li>
+          </ul>
+        </div>
+        <div class="hero__code-block" aria-label="Developer profile information">
+<pre id="heroSnippet"><code><span class="c">Developer Profile</span>
+{
+  "<span class="key">profile</span>": {
+    "<span class="key">name</span>": "<span class="string">ALIF UZZAMAN (UTSHO)</span>",
+    "<span class="key">alias</span>": "<span class="string">AURA</span>",
+    "<span class="key">role</span>": "<span class="string">Full Stack Developer & Security Specialist</span>",
+    "<span class="key">organization</span>": "<span class="string">Cyber Shield Bangladesh</span>"
+  },
+  "<span class="key">expertise</span>": [
+    "<span class="string">Web Application Development</span>",
+    "<span class="string">API Design & Integration</span>",
+    "<span class="string">Cybersecurity Solutions</span>",
+    "<span class="string">Database Architecture</span>",
+    "<span class="string">System Automation</span>"
+  ],
+  "<span class="key">technologies</span>": {
+    "<span class="key">frontend</span>": [<span class="string">"HTML5"</span>, <span class="string">"CSS3"</span>, <span class="string">"JavaScript"</span>, <span class="string">"React"</span>],
+    "<span class="key">backend</span>": [<span class="string">"PHP"</span>, <span class="string">"Python"</span>, <span class="string">"Node.js"</span>, <span class="string">"Express"</span>],
+    "<span class="key">database</span>": [<span class="string">"MySQL"</span>, <span class="string">"MongoDB"</span>, <span class="string">"PostgreSQL"</span>],
+    "<span class="key">tools</span>": [<span class="string">"Git"</span>, <span class="string">"Docker"</span>, <span class="string">"AWS"</span>, <span class="string">"Linux"</span>]
+  },
+  "<span class="key">contact</span>": {
+    "<span class="key">telegram</span>": "<span class="string">@JIMIORA</span>",
+    "<span class="key">website</span>": "<span class="string">https://lewra.shop</span>",
+    "<span class="key">channel</span>": "<span class="string">@CYBER_SHIELD_BANGLADESH</span>"
+  }
+}</code></pre>
+          <div class="code-bar">
+            <span class="dot green"></span><span class="dot yellow"></span><span class="dot red"></span>
+            <span class="fname">aura-profile.json</span>
+          </div>
+        </div>
+      </div>
+    </section>
 
-  <script type="module">
-    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-app.js";
-    import { getAuth, signInWithPhoneNumber, RecaptchaVerifier } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-auth.js";
+    <!-- ABOUT -->
+    <section id="about" class="section" aria-labelledby="about-title">
+      <div class="section__header">
+        <h2 id="about-title" class="section__title">About Me</h2>
+        <div class="divider"></div>
+      </div>
+      <div class="about__grid">
+        <div class="about__text reveal">
+          <p>
+            I'm <strong>ALIF UZZAMAN (UTSHO)</strong>, professionally known as <strong>AURA</strong> - a passionate developer and security specialist from Bangladesh. With a strong focus on creating efficient and secure digital solutions, I bridge the gap between complex technical requirements and user-friendly experiences.
+          </p>
+          <p>
+            My expertise spans across full-stack web development, API integration, and cybersecurity. I believe in writing clean, maintainable code that not only functions perfectly but also remains secure and scalable for future growth.
+          </p>
+          <p>
+            As an active member of <strong>Cyber Shield Bangladesh</strong>, I'm committed to contributing to the tech community and staying updated with the latest security practices and development methodologies.
+          </p>
+          <ul class="stats" aria-label="Professional Metrics">
+            <li><span class="num">3+</span><span class="label">Years Coding</span></li>
+            <li><span class="num">50+</span><span class="label">Projects Completed</span></li>
+            <li><span class="num">100%</span><span class="label">Client Satisfaction</span></li>
+            <li><span class="num">24/7</span><span class="label">Learning Mindset</span></li>
+          </ul>
+        </div>
+        
+        <div class="about__panel reveal">
+          <figure class="profile-card">
+            <img src="https://lewra.shop/img/profile.jpg" alt="Professional portrait of ALIF UZZAMAN (AURA)" loading="lazy">
+            <figcaption>
+              <span class="title">AURA</span>
+              <span class="sub">ALIF UZZAMAN (UTSHO)</span>
+              <div class="profile-badges">
+                <span class="badge"><i class="bi bi-shield-check"></i> Security</span>
+                <span class="badge"><i class="bi bi-code-square"></i> Development</span>
+                <span class="badge"><i class="bi bi-cpu"></i> Innovation</span>
+              </div>
+            </figcaption>
+          </figure>
+        </div>
+      </div>
+    </section>
 
-    const firebaseConfig = {
-      apiKey: "AIzaSyCbHPks7vfhqzH61h0QNT58MF_NaMQAfgk",
-      authDomain: "authentication-83d40.firebaseapp.com",
-      projectId: "authentication-83d40",
-      storageBucket: "authentication-83d40.firebasestorage.app",
-      messagingSenderId: "720025080360",
-      appId: "1:720025080360:web:67638f35811f5462439b1d",
-      measurementId: "G-6B5ZNVCFB3"
-    };
+    <!-- STACK -->
+    <section id="stack" class="section" aria-labelledby="stack-title">
+      <div class="section__header">
+        <h2 id="stack-title" class="section__title">Technical Stack</h2>
+        <div class="divider"></div>
+      </div>
+      <div class="stack__groups">
+        <div class="stack-group reveal">
+          <h3><i class="bi bi-code-slash"></i> Core Technologies</h3>
+          <ul class="tag-list">
+            <li class="tag">PHP</li><li class="tag">Python</li><li class="tag">JavaScript</li>
+            <li class="tag">HTML5</li><li class="tag">CSS3</li><li class="tag">SQL</li>
+          </ul>
+          <ul class="bars">
+            <li><span>PHP Development</span><div class="bar"><b style="--w:95%"></b></div></li>
+            <li><span>Python Scripting</span><div class="bar"><b style="--w:88%"></b></div></li>
+            <li><span>JavaScript</span><div class="bar"><b style="--w:92%"></b></div></li>
+            <li><span>Database Design</span><div class="bar"><b style="--w:90%"></b></div></li>
+          </ul>
+        </div>
+        
+        <div class="stack-group reveal">
+          <h3><i class="bi bi-shield-lock"></i> Security & APIs</h3>
+          <ul class="tag-list">
+            <li class="tag">API Development</li><li class="tag">RESTful APIs</li><li class="tag">Web Security</li>
+            <li class="tag">Data Protection</li><li class="tag">Encryption</li><li class="tag">Authentication</li>
+          </ul>
+          <ul class="bars">
+            <li><span>API Integration</span><div class="bar"><b style="--w:94%"></b></div></li>
+            <li><span>Security Protocols</span><div class="bar"><b style="--w:89%"></b></div></li>
+            <li><span>System Architecture</span><div class="bar"><b style="--w:91%"></b></div></li>
+          </ul>
+        </div>
+        
+        <div class="stack-group reveal">
+          <h3><i class="bi bi-tools"></i> Development Tools</h3>
+          <ul class="tag-list">
+            <li class="tag">Git & GitHub</li><li class="tag">VS Code</li><li class="tag">Docker</li>
+            <li class="tag">Linux</li><li class="tag">AWS</li><li class="tag">Postman</li>
+          </ul>
+          <ul class="bars">
+            <li><span>Version Control</span><div class="bar"><b style="--w:96%"></b></div></li>
+            <li><span>Development Environment</span><div class="bar"><b style="--w:93%"></b></div></li>
+            <li><span>Deployment</span><div class="bar"><b style="--w:87%"></b></div></li>
+          </ul>
+        </div>
+        
+        <div class="stack-group reveal">
+          <h3><i class="bi bi-lightbulb"></i> Specializations</h3>
+          <ul class="tag-list">
+            <li class="tag">Web Applications</li><li class="tag">System Design</li><li class="tag">Problem Solving</li>
+            <li class="tag">Code Optimization</li><li class="tag">Technical Research</li><li class="tag">Mentorship</li>
+          </ul>
+          <p class="group-note">
+            I specialize in creating robust, scalable solutions with emphasis on security, performance, and maintainability. 
+            Every project is an opportunity to innovate and deliver excellence.
+          </p>
+        </div>
+      </div>
+    </section>
 
-    const app = initializeApp(firebaseConfig);
-    const auth = getAuth(app);
+    <!-- PROJECTS -->
+    <section id="projects" class="section" aria-labelledby="projects-title">
+      <div class="section__header">
+        <h2 id="projects-title" class="section__title">Featured Projects</h2>
+        <div class="divider"></div>
+      </div>
 
-    window.recaptchaVerifier = new RecaptchaVerifier(auth, 'recaptcha-container', {
-      'size': 'normal'
-    });
+      <div class="project-filters">
+        <button class="filter-btn active" data-filter="all">All Projects</button>
+        <button class="filter-btn" data-filter="web">Web Development</button>
+        <button class="filter-btn" data-filter="api">API Solutions</button>
+        <button class="filter-btn" data-filter="security">Security</button>
+        <button class="filter-btn" data-filter="automation">Automation</button>
+      </div>
 
-    window.sendOTP = function () {
-      const phoneNumber = document.getElementById("phoneNumber").value;
-      const appVerifier = window.recaptchaVerifier;
+      <div class="projects__grid" id="projectGrid">
+        <article class="project-card reveal" data-tags="web api">
+          <div class="project-card__head">
+            <span class="project-icon"><i class="bi bi-globe" aria-hidden="true"></i></span>
+            <h3 class="project-title">Professional Portfolio Platform</h3>
+          </div>
+          <p class="project-desc">
+            A modern, responsive portfolio website showcasing professional work with optimized performance, 
+            accessibility features, and seamless user experience across all devices.
+          </p>
+          <ul class="mini-tags">
+            <li>HTML5</li><li>CSS3</li><li>JavaScript</li><li>PHP</li>
+          </ul>
+          <div class="project-img lazy">
+            <img data-src="https://placehold.co/800x400/111c23/9db4c2?text=Portfolio+Website" alt="Portfolio website interface" loading="lazy">
+          </div>
+          <div class="project-links">
+            <a href="https://lewra.shop" class="plink" target="_blank" rel="noopener"><i class="bi bi-eye"></i> Live Demo</a>
+            <button class="plink details-btn" data-project="portfolio"><i class="bi bi-info-circle"></i> Details</button>
+          </div>
+        </article>
 
-      signInWithPhoneNumber(auth, phoneNumber, appVerifier)
-        .then((confirmationResult) => {
-          window.confirmationResult = confirmationResult;
-          document.getElementById("status").innerText = "OTP Sent!";
-        })
-        .catch((error) => {
-          document.getElementById("status").innerText = "Error: " + error.message;
-        });
-    }
+        <article class="project-card reveal" data-tags="api automation">
+          <div class="project-card__head">
+            <span class="project-icon"><i class="bi bi-cpu" aria-hidden="true"></i></span>
+            <h3 class="project-title">SMM Service API</h3>
+          </div>
+          <p class="project-desc">
+            Robust API system for social media marketing services with secure authentication, 
+            rate limiting, and professional response handling for enterprise-level applications.
+          </p>
+          <ul class="mini-tags">
+            <li>PHP</li><li>REST API</li><li>Security</li><li>Automation</li>
+          </ul>
+          <div class="project-img lazy">
+            <img data-src="https://placehold.co/800x400/111c23/b3cdd8?text=API+System" alt="API system architecture" loading="lazy">
+          </div>
+          <div class="project-links">
+            <a href="https://lewra.shop/api.php" class="plink" target="_blank" rel="noopener"><i class="bi bi-terminal"></i> API Docs</a>
+            <button class="plink details-btn" data-project="api"><i class="bi bi-info-circle"></i> Technical Specs</button>
+          </div>
+        </article>
 
-    window.verifyOTP = function () {
-      const code = document.getElementById("otpInput").value;
-      window.confirmationResult.confirm(code)
-        .then((result) => {
-          const user = result.user;
-          document.getElementById("status").innerText = "Login Success: " + user.phoneNumber;
-        })
-        .catch((error) => {
-          document.getElementById("status").innerText = "Invalid OTP!";
-        });
-    }
-  </script>
-</body>
-</html>
+        <article class="project-card reveal" data-tags="security web">
+          <div class="project-card__head">
+            <span class="project-icon"><i class="bi bi-shield-check" aria-hidden="true"></i></span>
+            <h3 class="project-title">Security Dashboard</h3>
+          </div>
+          <p class="project-desc">
+            Comprehensive security monitoring dashboard with real-time threat detection, 
+            vulnerability assessment, and automated security reporting features.
+          </p>
+          <ul class="mini-tags">
+            <li>Security</li><li>Python</li><li>Dashboard</li><li>Monitoring</li>
+          </ul>
+          <div class="project-img lazy">
+            <img data-src="https://placehold.co/800x400/111c23/9aaec2?text=Security+Dashboard" alt="Security dashboard interface" loading="lazy">
+          </div>
+          <div class="project-links">
+            <a href="#" class="plink disabled" aria-disabled="true"><i class="bi bi-lock"></i> Private</a>
+            <button class="plink details-btn" data-project="security"><i class="bi bi-info-circle"></i> Overview</button>
+          </div>
+        </article>
+
+        <article class="project-card project-card--featured reveal" data-tags="automation api">
+          <div class="featured-badge">Featured</div>
+          <div class="project-card__head">
+            <span class="project-icon"><i class="bi bi-robot" aria-hidden="true"></i></span>
+            <h3 class="project-title">Automation Framework</h3>
+          </div>
+          <p class="project-desc">
+            Advanced automation framework for streamlining development workflows, 
+            with plugin architecture and extensive customization capabilities.
+          </p>
+          <ul class="mini-tags">
+            <li>Python</li><li>Automation</li><li>Framework</li><li>Customization</li>
+          </ul>
+          <div class="project-img lazy">
+            <img data-src="https://placehold.co/800x400/111c23/8fa3b5?text=Automation+Framework" alt="Automation framework diagram" loading="lazy">
+          </div>
+          <div class="project-links">
+            <a href="https://t.me/JIMIORA" class="plink" target="_blank" rel="noopener"><i class="bi bi-telegram"></i> Inquire</a>
+            <button class="plink details-btn" data-project="automation"><i class="bi bi-info-circle"></i> Features</button>
+          </div>
+        </article>
+      </div>
+
+      <div class="projects__more">
+        <a href="https://github.com/yourusername" target="_blank" rel="noopener" class="btn btn--ghost">
+          <i class="bi bi-github" aria-hidden="true"></i> View More on GitHub
+        </a>
+      </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section id="contact" class="section" aria-labelledby="contact-title">
+      <div class="section__header">
+        <h2 id="contact-title" class="section__title">Get In Touch</h2>
+        <div class="divider"></div>
+      </div>
+      <div class="contact__grid">
+        <div class="contact__info reveal">
+          <div class="info-block">
+            <h3 class="info-block__title"><i class="bi bi-person-badge" aria-hidden="true"></i> Professional Contact</h3>
+            <ul class="info-list">
+              <li><span>Name:</span> ALIF UZZAMAN (UTSHO)</li>
+              <li><span>Professional Alias:</span> AURA</li>
+              <li><span>Email:</span> <a href="/cdn-cgi/l/email-protection
+<!DOCTYPE html>
+<html lang="en" class="no-js" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <title>AURA | ALIF UZZAMAN (UTSHO)-AURA - Developer & Security Specialist</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="description" content="ALIF UZZAMAN (UTSHO) - AURA | Professional Developer & Security Specialist | Cyber Shield Bangladesh">
+  <meta name="theme-color" content="#05080b" id="theme-color">
+  <link rel="icon" type="image/x-icon" href="favicon.ico">
+  <link rel="preload" href="fonts/jetbrains-mono-regular.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="style.css?v=2">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
+  <script>document.documentElement.classList.remove('no-js');</script>
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Person",
+  "name": "ALIF UZZAMAN",
+  "alternateName": "AURA",
+  "url": "https://lewra.shop",
+  "telegram": "@JIMIORA",
+  "image": "https://lewra.shop/img/profile.jpg",
+  "jobTitle": "Full Stack Developer & Security Specialist",
+  "description": "ALIF UZZAMAN (UTSHO), known as AURA, is a professional developer and security specialist from Bangladesh. Member of Cyber Shield Bangladesh with expertise in web development, API integration, and cybersecurity solutions.",
+  "birthDate": "2009-11-19",
+  "nationality": "Bangladeshi",
+  "gender": "Male",
+  "knowsLanguage": ["Bengali", "English"],
+  "sameAs": [
+    "https://lewra.shop",
+    "https://t.me/JIMIORA",
+    "https://t.me/CYBER_SHIELD_BANGLADESH"
+  ],
+  "worksFor": {
+    "@type": "Organization",
+    "name": "Cyber Shield Bangladesh",
+    "url": "https://t.me/CYBER_SHIELD_BANGLADESH"
+  },
+  "alumniOf": "Self-taught in Software Development & Cybersecurity",
+  "skills": [
+    "Web Development",
+    "API Development",
+    "Cybersecurity",
+    "PHP Development",
+    "Python Scripting",
+    "JavaScript Development",
+    "Database Management"
+  ]
+}
+</script>
+  
+</head>
+<body>
+  <!-- Animated Background -->
+  <canvas id="bg-flow" aria-hidden="true"></canvas>
+  <div class="bg-grid" aria-hidden="true"></div>
+  <div class="bg-aurora" aria-hidden="true"></div>
+  <div id="perf-panel" class="perf-panel" hidden></div>
+  <div id="live-region" class="sr-only" aria-live="polite"></div>
+
+  <a class="skip-link" href="#main">Skip to main content</a>
+
+  <header class="site-header" id="top">
+    <div class="header-inner">
+      <div class="brand">
+        <span class="brand-icon"><i class="bi bi-braces" aria-hidden="true"></i></span>
+        <span class="brand-name"><span class="accent-dot">AURA</span></span>
+      </div>
+      <nav class="nav" aria-label="Primary">
+        <ul class="nav__list">
+          <li><a href="#about" data-nav>About</a></li>
+          <li><a href="#stack" data-nav>Stack</a></li>
+          <li><a href="#projects" data-nav>Projects</a></li>
+          <li><a href="#contact" data-nav>Contact</a></li>
+        </ul>
+      </nav>
+      <div class="header-actions">
+        <button id="themeToggle" class="icon-btn" aria-label="Toggle theme">
+          <i class="bi bi-sun-fill theme-icon" aria-hidden="true"></i>
+        </button>
+        <button class="nav-toggle" aria-label="Toggle navigation" aria-expanded="false" aria-controls="mobileNav">
+          <span class="nav-toggle__line"></span>
+          <span class="nav-toggle__line"></span>
+          <span class="nav-toggle__line"></span>
+        </button>
+      </div>
+    </div>
+    <div id="mobileNav" class="mobile-nav" hidden>
+      <ul class="mobile-nav__list">
+        <li><a href="#about" data-nav>About</a></li>
+        <li><a href="#stack" data-nav>Stack</a></li>
+        <li><a href="#projects" data-nav>Projects</a></li>
+        <li><a href="#contact" data-nav>Contact</a></li>
+      </ul>
+    </div>
+  </header>
+
+  <main id="main">
+    <!-- HERO -->
+    <section class="section hero" aria-labelledby="hero-title">
+      <div class="hero__layout">
+        <div class="hero__content">
+          <h1 id="hero-title" class="hero__title">
+            ALIF UZZAMAN <span class="accent-text">(UTSHO)</span>
+          </h1>
+          <p class="hero__roles">
+            <span class="role-prefix"><i class="bi bi-stars" aria-hidden="true"></i></span>
+            <span class="role-rotator" data-roles='["Full Stack Developer","Security Specialist","API Developer","Problem Solver"]'>AURA</span>
+            <span class="caret" aria-hidden="true"></span>
+          </p>
+          <p class="hero__tagline">
+            Professional developer and security specialist passionate about creating innovative solutions. 
+            Specializing in web development, API integration, and cybersecurity with a focus on clean code and user experience.
+          </p>
+          <div class="hero__actions">
+            <a href="#projects" class="btn btn--primary"><i class="bi bi-kanban" aria-hidden="true"></i> View Projects</a>
+            <a href="#contact" class="btn btn--outline"><i class="bi bi-send" aria-hidden="true"></i> Get In Touch</a>
+            <button id="copySnippet" class="btn btn--ghost" data-copy-target="#heroSnippet"><i class="bi bi-clipboard" aria-hidden="true"></i> Copy Bio</button>
+          </div>
+          <ul class="hero__meta">
+            <li><i class="bi bi-shield-check"></i> Security Focused</li>
+            <li><i class="bi bi-code-slash"></i> Clean Code</li>
+            <li><i class="bi bi-lightning-charge"></i> Fast Delivery</li>
+          </ul>
+        </div>
+        <div class="hero__code-block" aria-label="Developer profile information">
+<pre id="heroSnippet"><code><span class="c">Developer Profile</span>
+{
+  "<span class="key">profile</span>": {
+    "<span class="key">name</span>": "<span class="string">ALIF UZZAMAN (UTSHO)</span>",
+    "<span class="key">alias</span>": "<span class="string">AURA</span>",
+    "<span class="key">role</span>": "<span class="string">Full Stack Developer & Security Specialist</span>",
+    "<span class="key">organization</span>": "<span class="string">Cyber Shield Bangladesh</span>"
+  },
+  "<span class="key">expertise</span>": [
+    "<span class="string">Web Application Development</span>",
+    "<span class="string">API Design & Integration</span>",
+    "<span class="string">Cybersecurity Solutions</span>",
+    "<span class="string">Database Architecture</span>",
+    "<span class="string">System Automation</span>"
+  ],
+  "<span class="key">technologies</span>": {
+    "<span class="key">frontend</span>": [<span class="string">"HTML5"</span>, <span class="string">"CSS3"</span>, <span class="string">"JavaScript"</span>, <span class="string">"React"</span>],
+    "<span class="key">backend</span>": [<span class="string">"PHP"</span>, <span class="string">"Python"</span>, <span class="string">"Node.js"</span>, <span class="string">"Express"</span>],
+    "<span class="key">database</span>": [<span class="string">"MySQL"</span>, <span class="string">"MongoDB"</span>, <span class="string">"PostgreSQL"</span>],
+    "<span class="key">tools</span>": [<span class="string">"Git"</span>, <span class="string">"Docker"</span>, <span class="string">"AWS"</span>, <span class="string">"Linux"</span>]
+  },
+  "<span class="key">contact</span>": {
+    "<span class="key">telegram</span>": "<span class="string">@JIMIORA</span>",
+    "<span class="key">website</span>": "<span class="string">https://lewra.shop</span>",
+    "<span class="key">channel</span>": "<span class="string">@CYBER_SHIELD_BANGLADESH</span>"
+  }
+}</code></pre>
+          <div class="code-bar">
+            <span class="dot green"></span><span class="dot yellow"></span><span class="dot red"></span>
+            <span class="fname">aura-profile.json</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ABOUT -->
+    <section id="about" class="section" aria-labelledby="about-title">
+      <div class="section__header">
+        <h2 id="about-title" class="section__title">About Me</h2>
+        <div class="divider"></div>
+      </div>
+      <div class="about__grid">
+        <div class="about__text reveal">
+          <p>
+            I'm <strong>ALIF UZZAMAN (UTSHO)</strong>, professionally known as <strong>AURA</strong> - a passionate developer and security specialist from Bangladesh. With a strong focus on creating efficient and secure digital solutions, I bridge the gap between complex technical requirements and user-friendly experiences.
+          </p>
+          <p>
+            My expertise spans across full-stack web development, API integration, and cybersecurity. I believe in writing clean, maintainable code that not only functions perfectly but also remains secure and scalable for future growth.
+          </p>
+          <p>
+            As an active member of <strong>Cyber Shield Bangladesh</strong>, I'm committed to contributing to the tech community and staying updated with the latest security practices and development methodologies.
+          </p>
+          <ul class="stats" aria-label="Professional Metrics">
+            <li><span class="num">3+</span><span class="label">Years Coding</span></li>
+            <li><span class="num">50+</span><span class="label">Projects Completed</span></li>
+            <li><span class="num">100%</span><span class="label">Client Satisfaction</span></li>
+            <li><span class="num">24/7</span><span class="label">Learning Mindset</span></li>
+          </ul>
+        </div>
+        
+        <div class="about__panel reveal">
+          <figure class="profile-card">
+            <img src="https://lewra.shop/img/profile.jpg" alt="Professional portrait of ALIF UZZAMAN (AURA)" loading="lazy">
+            <figcaption>
+              <span class="title">AURA</span>
+              <span class="sub">ALIF UZZAMAN (UTSHO)</span>
+              <div class="profile-badges">
+                <span class="badge"><i class="bi bi-shield-check"></i> Security</span>
+                <span class="badge"><i class="bi bi-code-square"></i> Development</span>
+                <span class="badge"><i class="bi bi-cpu"></i> Innovation</span>
+              </div>
+            </figcaption>
+          </figure>
+        </div>
+      </div>
+    </section>
+
+    <!-- STACK -->
+    <section id="stack" class="section" aria-labelledby="stack-title">
+      <div class="section__header">
+        <h2 id="stack-title" class="section__title">Technical Stack</h2>
+        <div class="divider"></div>
+      </div>
+      <div class="stack__groups">
+        <div class="stack-group reveal">
+          <h3><i class="bi bi-code-slash"></i> Core Technologies</h3>
+          <ul class="tag-list">
+            <li class="tag">PHP</li><li class="tag">Python</li><li class="tag">JavaScript</li>
+            <li class="tag">HTML5</li><li class="tag">CSS3</li><li class="tag">SQL</li>
+          </ul>
+          <ul class="bars">
+            <li><span>PHP Development</span><div class="bar"><b style="--w:95%"></b></div></li>
+            <li><span>Python Scripting</span><div class="bar"><b style="--w:88%"></b></div></li>
+            <li><span>JavaScript</span><div class="bar"><b style="--w:92%"></b></div></li>
+            <li><span>Database Design</span><div class="bar"><b style="--w:90%"></b></div></li>
+          </ul>
+        </div>
+        
+        <div class="stack-group reveal">
+          <h3><i class="bi bi-shield-lock"></i> Security & APIs</h3>
+          <ul class="tag-list">
+            <li class="tag">API Development</li><li class="tag">RESTful APIs</li><li class="tag">Web Security</li>
+            <li class="tag">Data Protection</li><li class="tag">Encryption</li><li class="tag">Authentication</li>
+          </ul>
+          <ul class="bars">
+            <li><span>API Integration</span><div class="bar"><b style="--w:94%"></b></div></li>
+            <li><span>Security Protocols</span><div class="bar"><b style="--w:89%"></b></div></li>
+            <li><span>System Architecture</span><div class="bar"><b style="--w:91%"></b></div></li>
+          </ul>
+        </div>
+        
+        <div class="stack-group reveal">
+          <h3><i class="bi bi-tools"></i> Development Tools</h3>
+          <ul class="tag-list">
+            <li class="tag">Git & GitHub</li><li class="tag">VS Code</li><li class="tag">Docker</li>
+            <li class="tag">Linux</li><li class="tag">AWS</li><li class="tag">Postman</li>
+          </ul>
+          <ul class="bars">
+            <li><span>Version Control</span><div class="bar"><b style="--w:96%"></b></div></li>
+            <li><span>Development Environment</span><div class="bar"><b style="--w:93%"></b></div></li>
+            <li><span>Deployment</span><div class="bar"><b style="--w:87%"></b></div></li>
+          </ul>
+        </div>
+        
+        <div class="stack-group reveal">
+          <h3><i class="bi bi-lightbulb"></i> Specializations</h3>
+          <ul class="tag-list">
+            <li class="tag">Web Applications</li><li class="tag">System Design</li><li class="tag">Problem Solving</li>
+            <li class="tag">Code Optimization</li><li class="tag">Technical Research</li><li class="tag">Mentorship</li>
+          </ul>
+          <p class="group-note">
+            I specialize in creating robust, scalable solutions with emphasis on security, performance, and maintainability. 
+            Every project is an opportunity to innovate and deliver excellence.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- PROJECTS -->
+    <section id="projects" class="section" aria-labelledby="projects-title">
+      <div class="section__header">
+        <h2 id="projects-title" class="section__title">Featured Projects</h2>
+        <div class="divider"></div>
+      </div>
+
+      <div class="project-filters">
+        <button class="filter-btn active" data-filter="all">All Projects</button>
+        <button class="filter-btn" data-filter="web">Web Development</button>
+        <button class="filter-btn" data-filter="api">API Solutions</button>
+        <button class="filter-btn" data-filter="security">Security</button>
+        <button class="filter-btn" data-filter="automation">Automation</button>
+      </div>
+
+      <div class="projects__grid" id="projectGrid">
+        <article class="project-card reveal" data-tags="web api">
+          <div class="project-card__head">
+            <span class="project-icon"><i class="bi bi-globe" aria-hidden="true"></i></span>
+            <h3 class="project-title">Professional Portfolio Platform</h3>
+          </div>
+          <p class="project-desc">
+            A modern, responsive portfolio website showcasing professional work with optimized performance, 
+            accessibility features, and seamless user experience across all devices.
+          </p>
+          <ul class="mini-tags">
+            <li>HTML5</li><li>CSS3</li><li>JavaScript</li><li>PHP</li>
+          </ul>
+          <div class="project-img lazy">
+            <img data-src="https://placehold.co/800x400/111c23/9db4c2?text=Portfolio+Website" alt="Portfolio website interface" loading="lazy">
+          </div>
+          <div class="project-links">
+            <a href="https://lewra.shop" class="plink" target="_blank" rel="noopener"><i class="bi bi-eye"></i> Live Demo</a>
+            <button class="plink details-btn" data-project="portfolio"><i class="bi bi-info-circle"></i> Details</button>
+          </div>
+        </article>
+
+        <article class="project-card reveal" data-tags="api automation">
+          <div class="project-card__head">
+            <span class="project-icon"><i class="bi bi-cpu" aria-hidden="true"></i></span>
+            <h3 class="project-title">SMM Service API</h3>
+          </div>
+          <p class="project-desc">
+            Robust API system for social media marketing services with secure authentication, 
+            rate limiting, and professional response handling for enterprise-level applications.
+          </p>
+          <ul class="mini-tags">
+            <li>PHP</li><li>REST API</li><li>Security</li><li>Automation</li>
+          </ul>
+          <div class="project-img lazy">
+            <img data-src="https://placehold.co/800x400/111c23/b3cdd8?text=API+System" alt="API system architecture" loading="lazy">
+          </div>
+          <div class="project-links">
+            <a href="https://lewra.shop/api.php" class="plink" target="_blank" rel="noopener"><i class="bi bi-terminal"></i> API Docs</a>
+            <button class="plink details-btn" data-project="api"><i class="bi bi-info-circle"></i> Technical Specs</button>
+          </div>
+        </article>
+
+        <article class="project-card reveal" data-tags="security web">
+          <div class="project-card__head">
+            <span class="project-icon"><i class="bi bi-shield-check" aria-hidden="true"></i></span>
+            <h3 class="project-title">Security Dashboard</h3>
+          </div>
+          <p class="project-desc">
+            Comprehensive security monitoring dashboard with real-time threat detection, 
+            vulnerability assessment, and automated security reporting features.
+          </p>
+          <ul class="mini-tags">
+            <li>Security</li><li>Python</li><li>Dashboard</li><li>Monitoring</li>
+          </ul>
+          <div class="project-img lazy">
+            <img data-src="https://placehold.co/800x400/111c23/9aaec2?text=Security+Dashboard" alt="Security dashboard interface" loading="lazy">
+          </div>
+          <div class="project-links">
+            <a href="#" class="plink disabled" aria-disabled="true"><i class="bi bi-lock"></i> Private</a>
+            <button class="plink details-btn" data-project="security"><i class="bi bi-info-circle"></i> Overview</button>
+          </div>
+        </article>
+
+        <article class="project-card project-card--featured reveal" data-tags="automation api">
+          <div class="featured-badge">Featured</div>
+          <div class="project-card__head">
+            <span class="project-icon"><i class="bi bi-robot" aria-hidden="true"></i></span>
+            <h3 class="project-title">Automation Framework</h3>
+          </div>
+          <p class="project-desc">
+            Advanced automation framework for streamlining development workflows, 
+            with plugin architecture and extensive customization capabilities.
+          </p>
+          <ul class="mini-tags">
+            <li>Python</li><li>Automation</li><li>Framework</li><li>Customization</li>
+          </ul>
+          <div class="project-img lazy">
+            <img data-src="https://placehold.co/800x400/111c23/8fa3b5?text=Automation+Framework" alt="Automation framework diagram" loading="lazy">
+          </div>
+          <div class="project-links">
+            <a href="https://t.me/JIMIORA" class="plink" target="_blank" rel="noopener"><i class="bi bi-telegram"></i> Inquire</a>
+            <button class="plink details-btn" data-project="automation"><i class="bi bi-info-circle"></i> Features</button>
+          </div>
+        </article>
+      </div>
+
+      <div class="projects__more">
+        <a href="https://github.com/yourusername" target="_blank" rel="noopener" class="btn btn--ghost">
+          <i class="bi bi-github" aria-hidden="true"></i> View More on GitHub
+        </a>
+      </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section id="contact" class="section" aria-labelledby="contact-title">
+      <div class="section__header">
+        <h2 id="contact-title" class="section__title">Get In Touch</h2>
+        <div class="divider"></div>
+      </div>
+      <div class="contact__grid">
+        <div class="contact__info reveal">
+          <div class="info-block">
+            <h3 class="info-block__title"><i class="bi bi-person-badge" aria-hidden="true"></i> Professional Contact</h3>
+            <ul class="info-list">
+              <li><span>Name:</span> ALIF UZZAMAN (UTSHO)</li>
+              <li><span>Professional Alias:</span> AURA</li>
+              <li><span>Email:</span> <a href="/cdn-cgi/l/email-protection
